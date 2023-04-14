@@ -1,0 +1,22 @@
+import requests
+import json
+
+
+
+def consulta_cnpj(cnpj):
+    url = f'https://receitaws.com.br/v1/cnpj/{cnpj}'
+    querystring = {"token":"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX","cnpj":"06990590000123","plugin":"RF"}
+    response = requests.request("GET", url, params=querystring)
+
+    resp = json.loads(response.text)
+
+    print(resp['nome'])
+    print(resp['atividade_principal'])
+    print(resp['atividades_secundarias'])
+      
+    
+    return resp['nome'], resp['atividade_principal'] ,resp['atividades_secundarias']  
+
+cnpj = input(str('Digite o CNPJ : '))
+consulta_cnpj(cnpj)
+print(consulta_cnpj) 
